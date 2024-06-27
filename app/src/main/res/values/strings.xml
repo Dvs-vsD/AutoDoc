@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Raven: Document Scanner</string>
+    <string name="placeholder_search">Search Documents</string>
+    <string name="raven">Raven</string>
+    <string name="btn_scan_now">Scan Now</string>
+    <string name="btn_share_pdf">Share PDF</string>
+    <string name="btn_share_jpg">Share Images</string>
+    <string name="rename_pdf">Rename your file</string>
+    <string name="text_files_are_ready">Great! Your files are ready</string>
+    <string name="minimalism_quote">\"Less is more\"</string>
+    <string name="title_description">Lightweight Document Scanner</string>
+</resources>
