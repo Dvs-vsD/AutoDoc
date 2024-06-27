@@ -28,7 +28,7 @@ To set up the Lightweight Document Scanner, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/Dvs-vsD/autodoc.git
+    git clone https://github.com/Dvs-vsD/AutoDoc.git
     ```
 2. **Navigate to the project directory:**
     ```bash
