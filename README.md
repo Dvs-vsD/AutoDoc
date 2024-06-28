@@ -32,7 +32,7 @@ To set up the Lightweight Document Scanner, follow these steps:
     ```
 2. **Navigate to the project directory:**
     ```bash
-    cd lightweight-document-scanner
+    cd AutoDoc
     ```
 3. **Open the project in Android Studio:**
     - Ensure you have the latest version of Android Studio installed.
@@ -42,18 +42,19 @@ To set up the Lightweight Document Scanner, follow these steps:
 
 1. Open the app on your Android device.
 2. Use the camera to scan a document.
-3. Save or Share the scanned document as a PDF or JPEGs.
+3. Save or Share the scanned document as a PDF or JPEG.
 
 ## Screenshots
 
 ### Home Screen
-![Home Screen]()
+![Home Screen](![home screen](https://github.com/Dvs-vsD/AutoDoc/assets/62606017/247209d8-b475-4587-a157-0ab9ca1a0a67))
 
 ### Scanning Screen
-![Scanning Screen]()
+![Scanning Screen](![capture screen](https://github.com/Dvs-vsD/AutoDoc/assets/62606017/e41d1d63-6735-4566-b5d1-c136f32100e8))
 
 ### Document Sharing Screen
-![Document Management Screen]()
+![Document Management Screen](![share options screen](https://github.com/Dvs-vsD/AutoDoc/assets/62606017/1293e253-bfd8-4cbc-8ab0-7119add9e8a2)
+)
 
 ## Contributing
 
