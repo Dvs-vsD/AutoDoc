@@ -47,13 +47,13 @@ To set up the Lightweight Document Scanner, follow these steps:
 ## Screenshots
 
 ### Home Screen
-<img src="[screenshots/scanning_screen.png](https://github.com/Dvs-vsD/AutoDoc/assets/62606017/247209d8-b475-4587-a157-0ab9ca1a0a67)" width="300">
+<img src="https://github.com/Dvs-vsD/AutoDoc/assets/62606017/247209d8-b475-4587-a157-0ab9ca1a0a67" width="300">
 
 ### Scanning Screen
-<img src="[screenshots/scanning_screen.png](https://github.com/Dvs-vsD/AutoDoc/assets/62606017/e41d1d63-6735-4566-b5d1-c136f32100e8)" width="300">
+<img src="https://github.com/Dvs-vsD/AutoDoc/assets/62606017/e41d1d63-6735-4566-b5d1-c136f32100e8" width="300">
 
 ### Document Sharing Screen
-<img src="[screenshots/scanning_screen.png](https://github.com/Dvs-vsD/AutoDoc/assets/62606017/1293e253-bfd8-4cbc-8ab0-7119add9e8a2)" width="300">
+<img src="https://github.com/Dvs-vsD/AutoDoc/assets/62606017/1293e253-bfd8-4cbc-8ab0-7119add9e8a2" width="300">
 
 
 ## Contributing
