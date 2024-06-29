@@ -59,7 +59,7 @@ To set up the Lightweight Document Scanner, follow these steps:
 <img src="https://github.com/Dvs-vsD/AutoDoc/assets/62606017/1293e253-bfd8-4cbc-8ab0-7119add9e8a2" width="300">
 
 ### Share PDF or Images
-<img src="https://github.com/Dvs-vsD/AutoDoc/assets/62606017/bb3b3dbc-f27b-4733-acfc-b6b654a97d69" width="300"><img src="https://github.com/Dvs-vsD/AutoDoc/assets/62606017/369d5478-f6af-40f7-b82d-1b2713b04367" width="300">
+<img src="https://github.com/Dvs-vsD/AutoDoc/assets/62606017/bb3b3dbc-f27b-4733-acfc-b6b654a97d69" width="300">  <img src="https://github.com/Dvs-vsD/AutoDoc/assets/62606017/369d5478-f6af-40f7-b82d-1b2713b04367" width="300">
 
 
 ## Contributing
