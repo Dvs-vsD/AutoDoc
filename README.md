@@ -1,6 +1,6 @@
-# Lightweight Document Scanner
+# Raven: Lightweight Document Scanner
 
-Welcome to the Lightweight Document Scanner! This project is a minimalistic document scanning application designed using Jetpack Compose for the user interface and Google's ML Kit for document scanning capabilities.
+Welcome to the Raven: Lightweight Document Scanner! This project is a minimalistic document scanning application designed using Jetpack Compose for the user interface and Google's ML Kit for document scanning capabilities.
 
 ## Table of Contents
 
