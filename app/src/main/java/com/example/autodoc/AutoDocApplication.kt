@@ -1,16 +1,21 @@
 package com.example.autodoc
 
 import android.app.Application
-import io.realm.Realm
-import io.realm.RealmConfiguration
+import android.util.Log
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 class AutoDocApplication: Application() {
     override fun onCreate() {
         super.onCreate()
-        realmConfiguration()
+//        realmConfiguration()
+        if (!BuildConfig.DEBUG) {
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+        } else {
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
+        }
     }
 
-    private fun realmConfiguration() {
+    /*private fun realmConfiguration() {
         Realm.init(this)
         val config = RealmConfiguration.Builder()
             .name("autodocDB.realm")
@@ -19,5 +24,5 @@ class AutoDocApplication: Application() {
             .build()
 
         Realm.setDefaultConfiguration(config)
-    }
+    }*/
 }

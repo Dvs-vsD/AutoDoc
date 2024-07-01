@@ -72,11 +72,10 @@ class MainActivity : ComponentActivity() {
             }
     }
 
-    fun handleScannerResult(activityResult: ActivityResult) {
+    private fun handleScannerResult(activityResult: ActivityResult) {
         val resultCode = activityResult.resultCode
         val result = GmsDocumentScanningResult.fromActivityResultIntent(activityResult.data)
         if (resultCode == RESULT_OK && result != null) {
-
             docScanViewModel.setResult(result)
         } else if (resultCode == RESULT_CANCELED) {
             Toast.makeText(this, "Scanning cancelled", Toast.LENGTH_SHORT).show()

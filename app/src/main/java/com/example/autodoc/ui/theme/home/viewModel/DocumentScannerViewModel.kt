@@ -5,19 +5,29 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.util.Log
+import androidx.compose.ui.Modifier
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.mlkit.vision.documentscanner.GmsDocumentScanningResult
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class DocumentScannerViewModel: ViewModel() {
 
     private val _result: MutableLiveData<GmsDocumentScanningResult?> = MutableLiveData(null)
     val result: LiveData<GmsDocumentScanningResult?> = _result
+    private val _pdf: MutableLiveData<File?> = MutableLiveData(null)
+    val pdf: LiveData<File?> = _pdf
 
     fun setResult(result: GmsDocumentScanningResult) {
+        result.pdf?.uri?.path?.let { path ->
+            val file = File(path)
+            _pdf.value = file
+        }
         _result.value = result
     }
 
@@ -26,9 +36,8 @@ class DocumentScannerViewModel: ViewModel() {
     }
 
     fun sharePdf(context: Context) {
-        result.value?.pdf?.uri?.path?.let { path ->
-            Log.d("path", result.value?.pdf?.uri.toString())
-            val externalUri = FileProvider.getUriForFile(context, "${context.packageName}.provider", File(path))
+        pdf.value?.let { file ->
+            val externalUri = FileProvider.getUriForFile(context, "${context.packageName}.provider", file)
 
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
                 putExtra(Intent.EXTRA_STREAM, externalUri)
@@ -86,8 +95,17 @@ class DocumentScannerViewModel: ViewModel() {
         }
     }
 
-    fun getFileNameFromUri(path: String): String? {
-        val file = File(path)
-        return file.name
+    @Throws(IOException::class)
+    fun copyAndRenameFile(context: Context, newFileName: String) {
+        pdf.value?.let { file ->
+            val contentResolver = context.contentResolver
+            val inputStream = contentResolver.openInputStream(file.toUri())
+            val cacheDir = context.cacheDir
+            _pdf.value = File(cacheDir, newFileName)
+
+            FileOutputStream(pdf.value).use { outputStream ->
+                inputStream?.copyTo(outputStream)
+            }
+        }
     }
 }

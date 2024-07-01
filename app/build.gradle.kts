@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
-    id("realm-android")
+//    id("realm-android")
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -23,12 +25,24 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            versionNameSuffix = "debug"
+            buildConfigField("boolean", "DEBUG", "true")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            versionNameSuffix = "live"
+            buildConfigField("boolean", "DEBUG", "false")
+
         }
     }
     compileOptions {
@@ -40,6 +54,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -64,6 +79,9 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.android.gms.document.scanner)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.firebase.common.ktx)
+    implementation(libs.firebase.crashlytics.ktx)
+    implementation(libs.play.services.measurement.api)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

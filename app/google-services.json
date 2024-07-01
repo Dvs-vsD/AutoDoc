@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "205459104345",
+    "project_id": "raven-642e8",
+    "storage_bucket": "raven-642e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205459104345:android:6b5c559a8064dd5d960748",
+        "android_client_info": {
+          "package_name": "com.example.autodoc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFSt_ysPTYSIYA2hegbEqOUGeqgP7lz1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
