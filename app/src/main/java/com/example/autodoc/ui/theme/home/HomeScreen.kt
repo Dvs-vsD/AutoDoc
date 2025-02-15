@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,6 +29,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -48,6 +50,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -217,44 +220,63 @@ fun ButtonSharePdf(
     context: Context,
     images: List<Uri>
 ) {
-    Box(modifier = modifier) {
-        Button(
-            onClick = { viewModel.sharePdf(context) },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.scrim
-            ),
-        ) {
-            Text(
-                text = stringResource(id = R.string.btn_share_pdf),
-                fontWeight = FontWeight.Bold,
-                modifier = modifier.padding(16.dp)
-            )
-        }
-        Utils.loadBitmapFromUri(context, images[0])?.asImageBitmap()?.let {
+    Row {
+        Box(modifier = modifier) {
+            Button(
+                onClick = { viewModel.sharePdf(context) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.scrim
+                ),
+            ) {
+                Text(
+                    text = stringResource(id = R.string.btn_share_pdf),
+                    fontWeight = FontWeight.Bold,
+                    modifier = modifier.padding(16.dp)
+                )
+            }
+            Utils.loadBitmapFromUri(context, images[0])?.asImageBitmap()?.let {
+                Image(
+                    bitmap = it,
+                    contentDescription = "pdf",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(48.dp, 64.dp)
+                        .offset(x = (-40).dp)
+                        .graphicsLayer(rotationZ = -15f)
+                        .zIndex(1f)
+                        .clip(RoundedCornerShape(4.dp))
+                )
+            }
             Image(
-                bitmap = it,
+                painter = painterResource(id = R.drawable.pdf_icon),
                 contentDescription = "pdf",
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .size(48.dp, 64.dp)
+                    .padding(8.dp)
                     .offset(x = (-40).dp)
                     .graphicsLayer(rotationZ = -15f)
                     .zIndex(1f)
-                    .clip(RoundedCornerShape(4.dp))
             )
         }
-        Image(
-            painter = painterResource(id = R.drawable.pdf_icon),
-            contentDescription = "pdf",
-            contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .size(48.dp, 64.dp)
-                .padding(8.dp)
-                .offset(x = (-40).dp)
-                .graphicsLayer(rotationZ = -15f)
-                .zIndex(1f)
-        )
+
+        //TODO: ASK PERMISSION FOR ANDROID 9 AND BELOW
+        IconButton (
+            onClick = { viewModel.savePdfToDevice(context) },
+            colors = IconButtonDefaults.iconButtonColors(
+                containerColor = MaterialTheme.colorScheme.scrim
+            ),
+            modifier = modifier.size(64.dp).padding(start = 8.dp)
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.baseline_download_24),
+                contentDescription = "",
+                tint = Color.White,
+                modifier = modifier.padding(16.dp)
+            )
+        }
     }
+
 }
 
 @Composable
@@ -264,45 +286,63 @@ fun ButtonShareImages(
     context: Context,
     images: List<Uri>
 ) {
-    Box(modifier = modifier) {
-        Button(
-            onClick = { viewModel.shareImages(context) },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.scrim
-            ),
-        ) {
-            Text(
-                text = stringResource(id = R.string.btn_share_jpg),
-                fontWeight = FontWeight.Bold,
-                modifier = modifier.padding(16.dp)
-            )
-        }
-        Utils.loadBitmapFromUri(context, images[0])?.asImageBitmap()?.let {
-            Image(
-                bitmap = it,
-                contentDescription = "pdf",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(48.dp, 64.dp)
-                    .offset(x = (-40).dp)
-                    .graphicsLayer(rotationZ = -15f)
-                    .zIndex(1f)
-                    .clip(RoundedCornerShape(4.dp))
-            )
-        }
-        if (images.size >= 2) {
-            Utils.loadBitmapFromUri(context, images[1])?.asImageBitmap()?.let {
+    Row {
+        Box(modifier = modifier) {
+            Button(
+                onClick = { viewModel.shareImages(context) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.scrim
+                ),
+            ) {
+                Text(
+                    text = stringResource(id = R.string.btn_share_jpg),
+                    fontWeight = FontWeight.Bold,
+                    modifier = modifier.padding(16.dp)
+                )
+            }
+            Utils.loadBitmapFromUri(context, images[0])?.asImageBitmap()?.let {
                 Image(
                     bitmap = it,
                     contentDescription = "pdf",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(48.dp, 64.dp)
-                        .offset(x = (-20).dp)
+                        .offset(x = (-40).dp)
+                        .graphicsLayer(rotationZ = -15f)
                         .zIndex(1f)
                         .clip(RoundedCornerShape(4.dp))
                 )
             }
+            if (images.size >= 2) {
+                Utils.loadBitmapFromUri(context, images[1])?.asImageBitmap()?.let {
+                    Image(
+                        bitmap = it,
+                        contentDescription = "pdf",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(48.dp, 64.dp)
+                            .offset(x = (-20).dp)
+                            .zIndex(1f)
+                            .clip(RoundedCornerShape(4.dp))
+                    )
+                }
+            }
+        }
+
+        //TODO: ASK PERMISSION FOR ANDROID 9 AND BELOW
+        IconButton (
+            onClick = { viewModel.saveImagesToGallery(context) },
+            colors = IconButtonDefaults.iconButtonColors(
+                containerColor = MaterialTheme.colorScheme.scrim
+            ),
+            modifier = modifier.size(64.dp).padding(start = 8.dp)
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.baseline_download_24),
+                contentDescription = "",
+                tint = Color.White,
+                modifier = modifier.padding(16.dp)
+            )
         }
     }
 }
@@ -318,11 +358,19 @@ fun ButtonRename(pdfName: String?, modifier: Modifier, viewModel: DocumentScanne
     val errorMessage =
         "Invalid file name. Please ensure it doesn't contain special characters and isn't empty."
 
-    Text(
-        text = name.plus(".pdf"),
-        style = MaterialTheme.typography.bodySmall,
-        fontWeight = FontWeight.Light
-    )
+    Row {
+        Text(
+            text = "file name: ",
+            style = MaterialTheme.typography.bodySmall,
+            fontWeight = FontWeight.Light
+        )
+        Text(
+            text = text,
+            style = MaterialTheme.typography.bodySmall,
+            fontWeight = FontWeight.Bold
+        )
+    }
+
     Spacer(modifier = modifier.size(2.dp))
 
     Button(
@@ -446,17 +494,14 @@ fun RenamePDFDialog(
     }
 }
 
+@Composable
+fun SaveToDevice(modifier: Modifier) {
+
+}
+
 fun validatePdfName(name: String): Boolean {
     val regex = Regex("^[a-zA-Z0-9 _-]+$")
     return name.isNotEmpty() && regex.matches(name)
-}
-
-@Preview(device = Devices.PIXEL_4)
-@Composable
-fun PreviewHome() {
-    AutoDocTheme {
-        HomeScreen(onScanButtonClicked = {}, DocumentScannerViewModel(), MainActivity())
-    }
 }
 
 @Preview(widthDp = 320, device = Devices.PIXEL_3A)
@@ -474,3 +519,40 @@ fun PreviewRename() {
         )
     }
 }
+
+@Preview(device = Devices.PIXEL_4)
+@Composable
+fun PreviewHome() {
+    AutoDocTheme {
+        HomeScreen(
+            onScanButtonClicked = {},
+            fakeViewModel(), // Use a mock/fake ViewModel
+            context = LocalContext.current // Provide a valid context for preview
+        )
+    }
+}
+
+@Preview(device = Devices.PIXEL_4, showBackground = true)
+@Composable
+fun PreviewSharePdfImages() {
+    val images = ArrayList<Uri>()
+    images.add(Uri.parse("content://com.example.autodoc/fake_document.pdf")) //Fake Uri
+    AutoDocTheme {
+        SharePdfImages(
+            modifier = Modifier,
+            fakeViewModel(), // Use a mock/fake ViewModel
+            context = LocalContext.current, // Provide a valid context for preview,
+            images,
+            ""
+        )
+    }
+}
+
+// Create a fake ViewModel for preview
+@Composable
+fun fakeViewModel(): DocumentScannerViewModel {
+    return remember {
+        DocumentScannerViewModel() // Replace with a constructor that doesn't require dependencies
+    }
+}
+
